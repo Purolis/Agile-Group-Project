@@ -11,14 +11,14 @@ class Dealer:
         return self.__hand
 
     def count_hand(self):
-        self.__hand_value = 0
-        for card in self.__hand:
-            self.__hand_value += card.get_value()
+        self.set_hand_value(0)
+        for card in self.get_hand():
+            self.set_hand_value(card.get_value() + self.get_hand_value())
 
         if self.__hand_value > 21:
-            for card in self.__hand:
+            for card in self.get_hand():
                 if card.get_value() == 11:
-                    self.__hand_value -= 10
+                    self.set_hand_value(self.get_hand_value() - 10) # DEBUG:: unsure about this bit
 
         return self.__hand_value
 
