@@ -1,3 +1,6 @@
+import array
+
+
 class Dealer:
     __hand_value = None
     __hand = []
@@ -29,7 +32,23 @@ class Dealer:
         return self.__hand_value
 
     def set_hand(self, hand):
-        self.__hand = hand
+        try:
+            enumerate(hand)
+        except Exception as err:
+            print("DEBUG:ERROR:: BaseException: set_hand() error\n\ttype(hand) might not be iterable.")
+            raise
+        else:
+            self.__hand = hand
+
 
     def set_hand_value(self, hand_value):
-        self.__hand_value = hand_value
+        try:
+            hand_value = int(hand_value)
+        except TypeError:
+            print("DEBUG:ERROR:: set_hand_value() error.\n\tArgument for hand value is NAN.")
+            raise
+        except Exception as err:
+            print("DEBUG:ERROR:: Unhandled BaseException...")
+            raise
+        else:
+            self.__hand_value = hand_value
